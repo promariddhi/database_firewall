@@ -41,7 +41,6 @@ func (p *Proxy) Start(r *ConnectionRegister) {
 	log.Printf("Connecting to %s...", p.raddr)
 
 	//--------------registration logic-----------------
-	r.Register(p.ip)
 	defer r.Unregister(p.ip)
 
 	//--------------Dial and copy------------------------

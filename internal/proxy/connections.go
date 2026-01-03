@@ -26,7 +26,6 @@ func NewConnectionRegister(cfg *(config.ConnectionConfig)) *ConnectionRegister {
 
 func (r *ConnectionRegister) TryRegister(ip net.IP) (bool, string) {
 	key := ip.String()
-
 	r.mu.Lock()
 	defer r.mu.Unlock()
 
@@ -41,12 +40,11 @@ func (r *ConnectionRegister) TryRegister(ip net.IP) (bool, string) {
 	}
 
 	r.ConnectionsAccepted += 1
+	r.Register(ip)
 	return true, ""
 }
 
 func (r *ConnectionRegister) Register(ip net.IP) {
-	r.mu.Lock()
-	defer r.mu.Unlock()
 	r.ActiveConnections += 1
 	ct, ok := r.ConnectionsByIP[ip.String()]
 	if !ok {
@@ -75,4 +73,11 @@ func (r *ConnectionRegister) ActiveConnectionsCount() int64 {
 	defer r.mu.Unlock()
 
 	return r.ActiveConnections
+}
+
+func (r *ConnectionRegister) IPConnectionsCount(ip net.IP) int64 {
+	r.mu.Lock()
+	defer r.mu.Unlock()
+
+	return r.ConnectionsByIP[ip.String()]
 }
