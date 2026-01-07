@@ -1,4 +1,6 @@
-# Database Firewall 
+# GO-WARDEN
+
+Standalone, lightweight TCP proxy firewall in go. Single YAML config, minimal dependencies. Still in development.
 
 ## Implemented
 
@@ -16,9 +18,13 @@
 - Connection Rate limiting (Token Bucket Algorithm)
 
 ## Next
-- Graceful connection teardown
-- Hard connection lifetime cap
+- Multi-Algorithm rate limiting
+- Half open connection handling
+- Hot reloads
+- Observability
 
 ## Blogs
 [Part 1](https://medium.com/@promariddhi/building-a-database-firewall-part-1-tcp-proxy-4134026ef739)
 
+## Dependencies
+[go-yaml](github.com/goccy/go-yaml)
